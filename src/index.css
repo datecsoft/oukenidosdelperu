@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #ffd113; /* Amarillo de laroro.pe usado como principal */
+  --color-brand-secondary: #00e5ff; /* Cyan brillante para contrastes */
+  --color-brand-dark: #2d0a3d; /* Morado profundo (inverso del azul) */
+  --color-brand-darker: #150220; /* Morado muy oscuro casi negro */
+  --color-brand-light: #f8fafc;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-darker text-brand-light font-sans antialiased overflow-x-hidden selection:bg-brand-primary selection:text-white;
+  }
+}
+
+/* Glassmorphism utilities */
+@layer utilities {
+  .glass {
+    @apply bg-brand-darker/60 backdrop-blur-md border border-white/10;
+  }
+  .glass-card {
+    @apply bg-brand-dark/80 backdrop-blur-sm border border-white/5 rounded-2xl shadow-xl;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary to-brand-secondary;
+  }
+}
