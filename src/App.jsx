@@ -7,7 +7,7 @@ import AdminPanel from './pages/AdminPanel'
 
 function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="bg-brand-darker min-h-screen text-brand-light font-sans selection:bg-brand-primary selection:text-white">
         <Header />
         

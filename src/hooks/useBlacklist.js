@@ -7,21 +7,32 @@ export const useBlacklist = () => {
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
-    const savedData = localStorage.getItem('oukenidos_blacklist');
-    if (savedData) {
-      setMembers(JSON.parse(savedData));
-    } else {
-      const processedData = blacklistData.map(member => ({
-        ...member,
-        photo: member.photo && member.photo.trim() !== "" ? member.photo : getAvatar(member.name)
-      }));
-      setMembers(processedData);
-    }
+    // Siempre leemos del JSON local que Vite empaqueta
+    const processedData = blacklistData.map(member => ({
+      ...member,
+      photo: member.photo && member.photo.trim() !== "" ? member.photo : getAvatar(member.name),
+      photoPosition: member.photoPosition || 'center'
+    }));
+    setMembers(processedData);
   }, []);
 
-  const saveMembers = (newMembers) => {
+  const saveMembers = async (newMembers) => {
+    // Actualizamos el estado UI de inmediato
     setMembers(newMembers);
-    localStorage.setItem('oukenidos_blacklist', JSON.stringify(newMembers));
+    
+    // Intentamos guardar físicamente en el JSON (solo funcionará en localhost con npm run dev)
+    try {
+      const response = await fetch('/api/save-blacklist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newMembers, null, 2)
+      });
+      if (!response.ok) {
+        console.warn('No se pudo guardar en el JSON. Esto es normal si estás en la versión pública de GitHub Pages.');
+      }
+    } catch (err) {
+      console.warn('El guardado permanente solo funciona ejecutando el proyecto en local.');
+    }
   };
 
   const addMember = (newMember) => {

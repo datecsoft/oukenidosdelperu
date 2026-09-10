@@ -38,7 +38,6 @@ const Footer = () => {
             <h4 className="text-white font-bold mb-6 tracking-wide">NAVEGACIÓN</h4>
             <ul className="space-y-3">
               <li><Link to="/" className="text-gray-400 hover:text-brand-primary transition-colors">Lista Negra</Link></li>
-              <li><Link to="/admin" className="text-gray-400 hover:text-brand-primary transition-colors">Administrar</Link></li>
             </ul>
           </div>
 

@@ -21,11 +21,6 @@ const Header = () => {
                   LISTA NEGRA
                 </Link>
               </li>
-              <li>
-                <Link to="/admin" className="text-gray-400 hover:text-brand-primary transition-colors text-sm font-bold tracking-wide">
-                  ADMINISTRAR
-                </Link>
-              </li>
             </ul>
           </nav>
 
@@ -46,7 +41,6 @@ const Header = () => {
             {/* Menú móvil (simplificado) */}
             <div className="md:hidden flex gap-4 ml-2">
               <Link to="/" className="text-white text-xs font-bold border border-white/20 px-2 py-1 rounded">LISTA</Link>
-              <Link to="/admin" className="text-white text-xs font-bold border border-white/20 px-2 py-1 rounded">ADMIN</Link>
             </div>
           </div>
         </div>
