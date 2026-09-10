@@ -202,9 +202,10 @@ const AdminPanel = () => {
 
             <button 
               type="submit" 
-              className="bg-brand-primary text-black font-bold py-3 rounded-lg hover:bg-brand-primary/90 transition-colors shadow-lg mt-2"
+              disabled={isSaving}
+              className="bg-brand-primary text-black font-bold py-3 rounded-lg hover:bg-brand-primary/90 transition-colors shadow-lg mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              CONDENAR AL OLVIDO
+              {isSaving ? 'GUARDANDO EN GITHUB...' : 'CONDENAR AL OLVIDO'}
             </button>
           </form>
         </div>
@@ -287,19 +288,19 @@ const AdminPanel = () => {
                     <td className="p-4 text-right">
                       {editingId === member.id ? (
                         <div className="flex justify-end gap-2">
-                          <button onClick={() => saveEditing(member.id)} className="p-2 bg-green-500/20 text-green-400 rounded hover:bg-green-500/40" title="Guardar">
+                          <button onClick={() => saveEditing(member.id)} disabled={isSaving} className="p-2 bg-green-500/20 text-green-400 rounded hover:bg-green-500/40 disabled:opacity-50" title="Guardar">
                             <IconCheck size={20} />
                           </button>
-                          <button onClick={cancelEditing} className="p-2 bg-red-500/20 text-red-400 rounded hover:bg-red-500/40" title="Cancelar">
+                          <button onClick={cancelEditing} disabled={isSaving} className="p-2 bg-red-500/20 text-red-400 rounded hover:bg-red-500/40 disabled:opacity-50" title="Cancelar">
                             <IconX size={20} />
                           </button>
                         </div>
                       ) : (
                         <div className="flex justify-end gap-2">
-                          <button onClick={() => startEditing(member)} className="p-2 bg-blue-500/20 text-blue-400 rounded hover:bg-blue-500/40" title="Editar">
+                          <button onClick={() => startEditing(member)} disabled={isSaving} className="p-2 bg-blue-500/20 text-blue-400 rounded hover:bg-blue-500/40 disabled:opacity-50" title="Editar">
                             <IconEdit size={20} />
                           </button>
-                          <button onClick={() => handleDelete(member.id)} className="p-2 bg-red-500/20 text-red-400 rounded hover:bg-red-500/40" title="Eliminar">
+                          <button onClick={() => handleDelete(member.id)} disabled={isSaving} className="p-2 bg-red-500/20 text-red-400 rounded hover:bg-red-500/40 disabled:opacity-50" title="Eliminar">
                             <IconTrash size={20} />
                           </button>
                         </div>

@@ -29,7 +29,10 @@ export const useBlacklist = () => {
             owner,
             repo,
             path,
-            ref: 'main'
+            ref: 'main',
+            headers: {
+              'If-None-Match': ''
+            }
           });
           sha = fileData.sha;
         } catch (err) {
