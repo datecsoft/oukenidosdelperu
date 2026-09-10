@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 import fs from 'fs'
 import path from 'path'
+import { exec } from 'child_process'
 
 function saveJsonPlugin() {
   return {
@@ -26,6 +27,17 @@ function saveJsonPlugin() {
               res.statusCode = 500;
               res.end(JSON.stringify({ success: false, error: err.message }));
             }
+          });
+        } else if (req.url === '/api/deploy' && req.method === 'POST') {
+          exec('git add src/data/blacklist.json && git commit -m "Actualización desde panel de control" && git push origin main && npm run deploy', (error, stdout, stderr) => {
+            if (error) {
+              console.error(`Deploy error: ${error.message}`);
+              res.statusCode = 500;
+              res.end(JSON.stringify({ success: false, error: error.message }));
+              return;
+            }
+            res.statusCode = 200;
+            res.end(JSON.stringify({ success: true }));
           });
         } else {
           res.statusCode = 405;

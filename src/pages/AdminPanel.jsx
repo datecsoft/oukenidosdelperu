@@ -51,11 +51,52 @@ const AdminPanel = () => {
     }
   };
 
+  const [isDeploying, setIsDeploying] = useState(false);
+  const [deployResult, setDeployResult] = useState(null);
+
+  const handleDeploy = async () => {
+    setIsDeploying(true);
+    setDeployResult(null);
+    try {
+      const response = await fetch('/api/deploy', { method: 'POST' });
+      const data = await response.json();
+      if (data.success) {
+        setDeployResult({ success: true, message: '¡Publicado con éxito! Los cambios estarán online en un par de minutos.' });
+      } else {
+        setDeployResult({ success: false, message: 'Hubo un error al publicar: ' + (data.error || 'Desconocido') });
+      }
+    } catch (err) {
+      setDeployResult({ success: false, message: 'No se pudo conectar con el servidor local para publicar.' });
+    }
+    setIsDeploying(false);
+  };
+
   return (
     <main className="min-h-screen pt-32 pb-24 relative overflow-hidden bg-brand-darker">
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-primary via-brand-darker to-brand-darker z-0 pointer-events-none"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Deploy Button */}
+        <div className="flex justify-end mb-8">
+          <div className="flex flex-col items-end">
+            <button 
+              onClick={handleDeploy}
+              disabled={isDeploying}
+              className={`flex items-center gap-2 font-bold py-3 px-6 rounded-full shadow-lg transition-all ${
+                isDeploying ? 'bg-gray-600 text-gray-300 cursor-not-allowed' : 'bg-green-500 text-black hover:bg-green-400 hover:scale-105'
+              }`}
+            >
+              {isDeploying ? '🚀 Publicando (toma 30s)...' : '🚀 Publicar Cambios a Internet'}
+            </button>
+            {deployResult && (
+              <p className={`mt-2 text-sm font-bold ${deployResult.success ? 'text-green-400' : 'text-red-400'}`}>
+                {deployResult.message}
+              </p>
+            )}
+          </div>
+        </div>
+
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center p-4 bg-brand-primary/20 rounded-full mb-6 shadow-[0_0_30px_rgba(255,209,19,0.3)]">
             <IconSkull size={64} className="text-brand-primary animate-pulse" />
