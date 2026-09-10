@@ -1,23 +1,149 @@
 [
-  { "id": 1, "name": "Diego “Chavo” Mayta", "reason": "Dijo que BEO Noticias era mejor que OUKE.", "photo": "" },
-  { "id": 2, "name": "Lucho Luchulú", "reason": "Se robó el micro en pleno streaming.", "photo": "" },
-  { "id": 3, "name": "Gabriel Calvo", "reason": "Llegó tarde al podcast 3 veces seguidas.", "photo": "" },
-  { "id": 4, "name": "Mane", "reason": "Burlarse de la edad de Marquina.", "photo": "" },
-  { "id": 5, "name": "JorGeek", "reason": "Intentó hackear la cuenta de YouTube de La Roro.", "photo": "" },
-  { "id": 6, "name": "Rockefeller", "reason": "Hizo un chiste que ni Orozco entendió.", "photo": "" },
-  { "id": 7, "name": "Alex Hidalgo", "reason": "Grabó detrás de cámaras sin permiso.", "photo": "" },
-  { "id": 8, "name": "Cint-G", "reason": "Cantó fuera de tono en vivo y rompió un parlante.", "photo": "" },
-  { "id": 9, "name": "Papá Dominguez", "reason": "Interrumpió una pauta publicitaria importante.", "photo": "" },
-  { "id": 10, "name": "NoX", "reason": "Spamear 'ZZZ' en el chat durante 2 horas.", "photo": "" },
-  { "id": 11, "name": "Kate Candela", "reason": "Opacó a Macla en el set.", "photo": "" },
-  { "id": 12, "name": "Porro Que Ladra", "reason": "Ladridos inapropiados en horario familiar.", "photo": "" },
-  { "id": 13, "name": "Lucho Cáceres", "reason": "Conflictos creativos irreconciliables.", "photo": "" },
-  { "id": 14, "name": "Martorongo", "reason": "Se comió el catering de todo el equipo.", "photo": "" },
-  { "id": 15, "name": "Chiclesitos", "reason": "Se pegó debajo de la mesa principal.", "photo": "" },
-  { "id": 16, "name": "Señor Pollito", "reason": "Hizo spoiler del próximo invitado.", "photo": "" },
-  { "id": 17, "name": "Ale Fuller", "reason": "Demasiado brillo para el modo oscuro del set.", "photo": "" },
-  { "id": 18, "name": "Silvana Cañote", "reason": "Conspiración contra los conductores principales.", "photo": "" },
-  { "id": 19, "name": "Manuela Camacho", "reason": "Revelar secretos de estado en vivo.", "photo": "" },
-  { "id": 20, "name": "Santi Lesmes", "reason": "Criticar la escenografía repetitivamente.", "photo": "" },
-  { "id": 21, "name": "Fatima Chavez", "reason": "Hacer reír demasiado a Orozco y desconcentrarlo.", "photo": "" }
+  {
+    "id": 1,
+    "name": "Diego “Chavo” Mayta",
+    "reason": "Dijo que BEO Noticias era mejor que OUKE.",
+    "photo": "https://i.ytimg.com/vi/n0vOKP0mvNI/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBFX31CNIxfYOrX_ltRch3zXwtaFQ",
+    "photoPosition": "center"
+  },
+  {
+    "id": 2,
+    "name": "Lucho Luchulú",
+    "reason": "Se robó el micro en pleno streaming.",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgMBR-6sjkAWGmi9Y1_7gMSw-7zaaYJlL_AzTCVRKDcEHuB_VhmNmdg2I&s=10",
+    "photoPosition": "center"
+  },
+  {
+    "id": 3,
+    "name": "Gabriel Calvo",
+    "reason": "Llegó tarde al podcast 3 veces seguidas.",
+    "photo": "https://images.mubicdn.net/images/cast_member/1143474/cache-936504-1704997760/image-w856.jpg",
+    "photoPosition": "center"
+  },
+  {
+    "id": 4,
+    "name": "Mane",
+    "reason": "Burlarse de la edad de Marquina.",
+    "photo": "https://ui-avatars.com/api/?name=Mane&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 5,
+    "name": "JorGeek",
+    "reason": "Intentó hackear la cuenta de YouTube de La Roro.",
+    "photo": "https://ui-avatars.com/api/?name=JorGeek&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 6,
+    "name": "Rockefeller",
+    "reason": "Hizo un chiste que ni Orozco entendió.",
+    "photo": "https://ui-avatars.com/api/?name=Rockefeller&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 7,
+    "name": "Alex Hidalgo",
+    "reason": "Grabó detrás de cámaras sin permiso.",
+    "photo": "https://ui-avatars.com/api/?name=Alex%20Hidalgo&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 8,
+    "name": "Cint-G",
+    "reason": "Cantó fuera de tono en vivo y rompió un parlante.",
+    "photo": "https://ui-avatars.com/api/?name=Cint-G&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 9,
+    "name": "Papá Dominguez",
+    "reason": "Interrumpió una pauta publicitaria importante.",
+    "photo": "https://ui-avatars.com/api/?name=Pap%C3%A1%20Dominguez&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 10,
+    "name": "NoX",
+    "reason": "Spamear 'ZZZ' en el chat durante 2 horas.",
+    "photo": "https://ui-avatars.com/api/?name=NoX&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 11,
+    "name": "Kate Candela",
+    "reason": "Opacó a Macla en el set.",
+    "photo": "https://ui-avatars.com/api/?name=Kate%20Candela&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 12,
+    "name": "Porro Que Ladra",
+    "reason": "Ladridos inapropiados en horario familiar.",
+    "photo": "https://ui-avatars.com/api/?name=Porro%20Que%20Ladra&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 13,
+    "name": "Lucho Cáceres",
+    "reason": "Conflictos creativos irreconciliables.",
+    "photo": "https://ui-avatars.com/api/?name=Lucho%20C%C3%A1ceres&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 14,
+    "name": "Martorongo",
+    "reason": "Se comió el catering de todo el equipo.",
+    "photo": "https://ui-avatars.com/api/?name=Martorongo&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 15,
+    "name": "Chiclesitos",
+    "reason": "Se pegó debajo de la mesa principal.",
+    "photo": "https://ui-avatars.com/api/?name=Chiclesitos&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 16,
+    "name": "Señor Pollito",
+    "reason": "Hizo spoiler del próximo invitado.",
+    "photo": "https://ui-avatars.com/api/?name=Se%C3%B1or%20Pollito&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 17,
+    "name": "Ale Fuller",
+    "reason": "Demasiado brillo para el modo oscuro del set.",
+    "photo": "https://ui-avatars.com/api/?name=Ale%20Fuller&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 18,
+    "name": "Silvana Cañote",
+    "reason": "Conspiración contra los conductores principales.",
+    "photo": "https://ui-avatars.com/api/?name=Silvana%20Ca%C3%B1ote&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 19,
+    "name": "Manuela Camacho",
+    "reason": "Revelar secretos de estado en vivo.",
+    "photo": "https://ui-avatars.com/api/?name=Manuela%20Camacho&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 20,
+    "name": "Santi Lesmes",
+    "reason": "Criticar la escenografía repetitivamente.",
+    "photo": "https://ui-avatars.com/api/?name=Santi%20Lesmes&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  },
+  {
+    "id": 21,
+    "name": "Fatima Chavez",
+    "reason": "Hacer reír demasiado a Orozco y desconcentrarlo.",
+    "photo": "https://ui-avatars.com/api/?name=Fatima%20Chavez&background=ffd113&color=000&size=128&font-size=0.33",
+    "photoPosition": "center"
+  }
 ]
