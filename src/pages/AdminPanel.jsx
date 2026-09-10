@@ -8,6 +8,23 @@ const AdminPanel = () => {
   const [newMember, setNewMember] = useState({ name: '', reason: '', photo: '', photoPosition: 'center' });
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({ name: '', reason: '', photo: '', photoPosition: 'center' });
+  
+  const [githubToken, setGithubToken] = useState(() => localStorage.getItem('oukenidos_github_token') || '');
+  const [inputToken, setInputToken] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState(null);
+
+  const handleSaveToken = (e) => {
+    e.preventDefault();
+    localStorage.setItem('oukenidos_github_token', inputToken);
+    setGithubToken(inputToken);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('oukenidos_github_token');
+    setGithubToken('');
+    setInputToken('');
+  };
 
   const positionOptions = [
     { value: 'top', label: 'Arriba' },
@@ -17,11 +34,19 @@ const AdminPanel = () => {
     { value: 'right', label: 'Derecha' }
   ];
 
-  const handleAdd = (e) => {
+  const handleAdd = async (e) => {
     e.preventDefault();
     if (!newMember.name || !newMember.reason) return;
-    addMember(newMember);
-    setNewMember({ name: '', reason: '', photo: '', photoPosition: 'center' });
+    setIsSaving(true);
+    setSaveMessage(null);
+    try {
+      await addMember(newMember, githubToken);
+      setNewMember({ name: '', reason: '', photo: '', photoPosition: 'center' });
+      setSaveMessage({ type: 'success', text: '✅ ¡Agregado y guardado en GitHub!' });
+    } catch (error) {
+      setSaveMessage({ type: 'error', text: '❌ Error: ' + error.message });
+    }
+    setIsSaving(false);
   };
 
   const startEditing = (member) => {
@@ -39,36 +64,32 @@ const AdminPanel = () => {
     setEditForm({ name: '', reason: '', photo: '', photoPosition: 'center' });
   };
 
-  const saveEditing = (id) => {
+  const saveEditing = async (id) => {
     if (!editForm.name || !editForm.reason) return;
-    editMember(id, editForm);
-    setEditingId(null);
-  };
-
-  const handleDelete = (id) => {
-    if(window.confirm('¿Seguro que quieres perdonar a este usuario y sacarlo de la lista?')) {
-      deleteMember(id);
-    }
-  };
-
-  const [isDeploying, setIsDeploying] = useState(false);
-  const [deployResult, setDeployResult] = useState(null);
-
-  const handleDeploy = async () => {
-    setIsDeploying(true);
-    setDeployResult(null);
+    setIsSaving(true);
+    setSaveMessage(null);
     try {
-      const response = await fetch('/api/deploy', { method: 'POST' });
-      const data = await response.json();
-      if (data.success) {
-        setDeployResult({ success: true, message: '¡Publicado con éxito! Los cambios estarán online en un par de minutos.' });
-      } else {
-        setDeployResult({ success: false, message: 'Hubo un error al publicar: ' + (data.error || 'Desconocido') });
-      }
-    } catch (err) {
-      setDeployResult({ success: false, message: 'No se pudo conectar con el servidor local para publicar.' });
+      await editMember(id, editForm, githubToken);
+      setEditingId(null);
+      setSaveMessage({ type: 'success', text: '✅ ¡Editado y guardado en GitHub!' });
+    } catch (error) {
+      setSaveMessage({ type: 'error', text: '❌ Error al editar: ' + error.message });
     }
-    setIsDeploying(false);
+    setIsSaving(false);
+  };
+
+  const handleDelete = async (id) => {
+    if(window.confirm('¿Seguro que quieres perdonar a este usuario y sacarlo de la lista?')) {
+      setIsSaving(true);
+      setSaveMessage(null);
+      try {
+        await deleteMember(id, githubToken);
+        setSaveMessage({ type: 'success', text: '✅ ¡Eliminado y guardado en GitHub!' });
+      } catch (error) {
+        setSaveMessage({ type: 'error', text: '❌ Error al eliminar: ' + error.message });
+      }
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -77,37 +98,65 @@ const AdminPanel = () => {
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Deploy Button */}
-        <div className="flex justify-end mb-8">
-          <div className="flex flex-col items-end">
-            <button 
-              onClick={handleDeploy}
-              disabled={isDeploying}
-              className={`flex items-center gap-2 font-bold py-3 px-6 rounded-full shadow-lg transition-all ${
-                isDeploying ? 'bg-gray-600 text-gray-300 cursor-not-allowed' : 'bg-green-500 text-black hover:bg-green-400 hover:scale-105'
-              }`}
-            >
-              {isDeploying ? '🚀 Publicando (toma 30s)...' : '🚀 Publicar Cambios a Internet'}
-            </button>
-            {deployResult && (
-              <p className={`mt-2 text-sm font-bold ${deployResult.success ? 'text-green-400' : 'text-red-400'}`}>
-                {deployResult.message}
-              </p>
-            )}
+        {/* Token Management */}
+        {!githubToken ? (
+          <div className="max-w-xl mx-auto mb-12 glass bg-black/80 p-8 rounded-2xl border border-brand-primary shadow-[0_0_40px_rgba(255,209,19,0.2)] text-center">
+            <IconSkull size={48} className="text-brand-primary mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-white mb-4">Acceso Restringido</h2>
+            <p className="text-gray-400 mb-6">
+              Para guardar los cambios directamente en GitHub Pages, necesitas ingresar tu Token de Acceso Personal (PAT) de GitHub. Se guardará de forma segura solo en tu navegador.
+            </p>
+            <form onSubmit={handleSaveToken} className="flex flex-col gap-4">
+              <input 
+                type="password" 
+                placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" 
+                className="bg-brand-dark border border-white/20 rounded-lg p-3 text-white text-center focus:outline-none focus:border-brand-primary"
+                value={inputToken}
+                onChange={(e) => setInputToken(e.target.value)}
+                required
+              />
+              <button 
+                type="submit" 
+                className="bg-brand-primary text-black font-bold py-3 rounded-lg hover:bg-brand-primary/90 transition-colors"
+              >
+                Ingresar al Panel
+              </button>
+            </form>
           </div>
-        </div>
+        ) : (
+          <>
+            <div className="flex justify-between items-center mb-8">
+              <div className="flex flex-col">
+                {isSaving && (
+                  <span className="text-brand-primary font-bold animate-pulse flex items-center gap-2">
+                    <IconCheck size={20} /> Guardando en GitHub y publicando...
+                  </span>
+                )}
+                {saveMessage && !isSaving && (
+                  <span className={`font-bold ${saveMessage.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                    {saveMessage.text}
+                  </span>
+                )}
+              </div>
+              <button 
+                onClick={handleLogout}
+                className="text-xs bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-1 rounded hover:bg-red-500/40 transition-colors"
+              >
+                Cerrar Sesión (Borrar Token)
+              </button>
+            </div>
 
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-4 bg-brand-primary/20 rounded-full mb-6 shadow-[0_0_30px_rgba(255,209,19,0.3)]">
-            <IconSkull size={64} className="text-brand-primary animate-pulse" />
-          </div>
-          <h1 className="text-5xl md:text-6xl font-black font-heading tracking-tight mb-4 text-white">
-            ADMINISTRACIÓN
-          </h1>
-          <p className="text-gray-400 text-xl max-w-2xl mx-auto">
-            Añade, edita o elimina a los sentenciados de la red.
-          </p>
-        </div>
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center justify-center p-4 bg-brand-primary/20 rounded-full mb-6 shadow-[0_0_30px_rgba(255,209,19,0.3)]">
+                <IconSkull size={64} className="text-brand-primary animate-pulse" />
+              </div>
+              <h1 className="text-5xl md:text-6xl font-black font-heading tracking-tight mb-4 text-white">
+                ADMINISTRACIÓN
+              </h1>
+              <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+                Añade, edita o elimina a los sentenciados de la red directamente en GitHub.
+              </p>
+            </div>
 
         {/* Formulario de Agregar */}
         <div className="max-w-2xl mx-auto mb-16 glass bg-black/40 p-6 rounded-2xl border border-brand-primary/30">
@@ -262,6 +311,8 @@ const AdminPanel = () => {
             </table>
           </div>
         </div>
+          </>
+        )}
       </div>
     </main>
   );
