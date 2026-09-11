@@ -1,5 +1,12 @@
 [
   {
+    "id": 23,
+    "name": "Nelson Capitán",
+    "reason": "Por aburrido zZzZzZ",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY7KXy-VBVbG1gIUoF1kDRpjA8p7hJ3Y9PyqwTE2gxCNUXvqqfygNPnqE&s=10",
+    "photoPosition": "center"
+  },
+  {
     "id": 22,
     "name": "Zaelita",
     "reason": "Le dijo a Roro que se parecía a Cristorata",
