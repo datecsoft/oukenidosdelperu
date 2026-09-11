@@ -1,5 +1,12 @@
 [
   {
+    "id": 22,
+    "name": "Zaelita",
+    "reason": "Le dijo a Roro que se parecía a Cristorata",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXUEOj81M9_wxRzDoYY9C4du_9nGcsD_W-iGYHyrVw6vRJK5bAN3TIM3w&s=10",
+    "photoPosition": "center"
+  },
+  {
     "id": 1,
     "name": "Diego “Chavo” Mayta",
     "reason": "Que te vaya bien con tu nuevo equipo",
